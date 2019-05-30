@@ -25,14 +25,12 @@ class Map {
 
 	displayStations(listStations)
 	{
-		let secondStation;
 
-		if(listStations[1] == undefined)
-			secondStation = "Choose a station";
-		else
-			secondStation = listStations[1];
+		if(listStations[1] !== undefined){
+			document.getElementById("inputTo").value = listStations[1];
+		}
 
-		document.getElementById('selected_stations').innerHTML = "From <strong>" + listStations[0] + "</strong><br>To <strong>" + secondStation + "</strong>";
+		document.getElementById("inputFrom").value = listStations[0];
 	}
 
 	getLineColor(stationName)

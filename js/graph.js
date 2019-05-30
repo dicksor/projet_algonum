@@ -1,64 +1,65 @@
 class Graph {
 	constructor() {
-		this.edges = {};
 		this.nodes = [];
+		this.adjacencyList = {};
 	}
 
 	addNode(node) {
 		this.nodes.push(node);
-		this.edges[node] = [];
+		this.adjacencyList[node] = [];
 	}
 
-	addEdge(node1, node2, weight=1) {
-		this.edges[node1].push({ node: node2, weight: weight });
-      	this.edges[node2].push({ node: node1, weight: weight });
+	addEdge(firstNode, secondNode, weight) {
+		this.adjacencyList[firstNode].push({node:secondNode, weight: weight});
+		this.adjacencyList[secondNode].push({node:firstNode, weight: weight});
 	}
 
-	display() {
-      let graph = "";
-      this.nodes.forEach(node => {
-         graph += node + "->" + this.edges[node].map(n => n.node).join(", ") + "\n";
-      });
-      console.log(graph);
-   }
+	findPathDijkstra(startNode, endNode) {
+		let times = {};
+		let backtrace = {};
+		let pq = new PriorityQueue();
 
-   addDirectedEdge(node1, node2, weight = 1) {
-      this.edges[node1].push({ node: node2, weight: weight });
-   }
+		times[startNode] = 0;
 
-   djikstraAlgorithm(startNode) {
-      let distances = {};
+		this.nodes.forEach(node => {
+			if(node !== startNode) {
+				times[node] = Infinity;
+			}
+		});
 
-      // Stores the reference to previous nodes
-      let prev = {};
-      let pq = new PriorityQueue(this.nodes.length * this.nodes.length);
+		pq.enqueue([startNode, 0]);
 
-      // Set distances to all nodes to be infinite except startNode
-      distances[startNode] = 0;
-      pq.enqueue(startNode, 0);
+		while(!pq.isEmpty()) {
+			let shortestStep = pq.dequeue();
+			let currentNode = shortestStep[0];
 
-      this.nodes.forEach(node => {
-         if (node !== startNode) distances[node] = Infinity;
-         prev[node] = null;
-      });
+			this.adjacencyList[currentNode].forEach(neighbor => {
+				let time = times[currentNode] + neighbor.weight;
 
-      while (!pq.isEmpty()) {
-         let minNode = pq.dequeue();
-         let currNode = minNode.data;
-         let weight = minNode.priority;
+				if(time < times[neighbor.node]) {
+					times[neighbor.node] = time;
+					backtrace[neighbor.node] = currentNode;
+					pq.enqueue([neighbor.node, time]);
+				}
+			});
+		}
 
-         this.edges[currNode].forEach(neighbor => {
-            let alt = distances[currNode] + neighbor.weight;
-            if (alt < distances[neighbor.node]) {
-               distances[neighbor.node] = alt;
+		let path = [endNode];
+		let lastStep = endNode;
 
-               console.log(neighbor.node)
+		while(lastStep !== startNode) {
+			path.unshift(backtrace[lastStep]);
+			lastStep = backtrace[lastStep];
+		}
 
-               prev[neighbor.node] = currNode;
-               pq.enqueue(neighbor.node, distances[neighbor.node]);
-            }
-         });
-      }
-      return distances;
-   }
-};
+		//return `path is ${path} and time is ${times[endNode]}`;
+
+		let arrayPathTime = [];
+		arrayPathTime[0] = path;
+		arrayPathTime[1] = times[endNode];
+
+		return arrayPathTime;
+	}
+}
+
+

@@ -1,32 +1,61 @@
 <html>
 <head>
-  <link rel="stylesheet" href="tubeMap.css">
   <script src="https://d3js.org/d3.v5.js"></script>
   <script src="https://unpkg.com/d3-tube-map@latest/dist/d3-tube-map.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/tubeMap.css">
+  <title>PathFinder - Vincent Moulin</title>
 </head>
   <body>
     <div style="margin:20px;">
-      <br>
-      <h1>PathFinder</h1>
-      <hr>
-      <h2 id="selected_stations">Cliquez sur un arrêt pour débuter !</h2>
-      <br>
-      <br>
-      <div class="content_map shadow p-3 mb-5 bg-white rounded">
-        <div id="tube-map">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+          <h1>PathFinder</h1>
+          <p>Auteur : Vincent Moulin</p>
+          <p>Date de création : 08.05.2019</p>
+          <p>Classe : INF2dlm-A</p>
+          <hr>
+          <h2 id="selected_stations">Cliquez sur un arrêt !</h2>
+          <br>
+          <button type="button" class="btn btn-info" onclick="clearAll()">Tout effacer</button>
+          <br>
+          <br>
+          <div class="form-group">
+            <label for="inputFrom"><h3><strong>From</strong></h3></label>
+            <input type="text" class="form-control form-control-lg" id="inputFrom" placeholder="Choisissez un arrêt sur la map" readonly>
+          </div>
+          <div class="form-group">
+            <label for="inputTo"><h3><strong>To</strong></h3></label>
+            <input type="text" class="form-control form-control-lg" id="inputTo" placeholder="Choisissez un arrêt sur la map" readonly>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary btn-lg" onclick="findPath()">Lancer la recherche d'itinéraire</button>
+          <p id="path"></p>
+        </div>
+        <div class="col-sm-9">
+          <div class="content_map">
+            <div id="tube-map"></div>
+          </div>
+          <p>Vous pouvez <strong>zoomer sur la map</strong> avec la molette.</p>
+        </div>
+        <br>
       </div>
-      <p id="display"><p>
       <br>
-      <br>
+      <hr>
+      <h2>Contextualisation</h2>
+      <h2>Méthodologie</h2>
+      <h2>Conclusion</h2>
+      <h2>Source</h2>
     </div>
     <script type="text/javascript" src="json/stations.json"></script>
     <script type="text/javascript" src="js/map.js"></script>
-    <script type="text/javascript" src="js_test/graph.js"></script>
-    <script type="text/javascript" src="js_test/priorityqueue.js"></script>
+    <script type="text/javascript" src="js/graph.js"></script>
+    <script type="text/javascript" src="js/priorityqueue.js"></script>
 
+    <script type="text/javascript" src="js/generate_graph.js"></script>
     <script type="text/javascript" src="js/generate_map.js"></script>
   </body>
 </html>

@@ -3,19 +3,13 @@ html, body {
   height: 100%;
 }
 
-text {
-  font-family: 'Hammersmith One', sans-serif;
-  fill: #0019A8;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: normal;
-}
+
 
 .content_map {
 	width: 100%;
-	height: 70%;
+	height: 100%;
 	border-style: solid;
-  	border-width: 2px;
-  	border-color: grey;
-  	margin: auto;
+	border-width: 2px;
+	border-color: black;
+	margin: auto;
 }
