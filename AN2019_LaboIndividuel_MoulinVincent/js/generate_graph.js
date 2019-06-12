@@ -33,9 +33,11 @@ function findPath() {
     // Prend en paramètre la station de départ et d'arrivée
     let data = g.findPathDijkstra(from, to);
 
+    text += "<br><button type='button' class='btn btn-danger btn-sm' onclick='clearAll()'>Tout effacer</button><br>";
+
     // Préparation des données à afficher
-    text += "<br><strong>Longueur du chemin</strong> : " + data[1] + "<br>";
-    text += "<strong>Prix du parcours</strong> : " + (data[1]*0.2).toFixed(2) + ".-<br>"; // J'ai décidé de fixer à 0.20.- le parcours entre deux stations
+    text += "<br><strong>Longueur du chemin</strong> : " + data[1] + " stations<br>";
+    text += "<strong>Prix du parcours</strong> : " + (data[1]*0.2).toFixed(2) + ".-<br><br>"; // J'ai décidé de fixer à 0.20.- le parcours entre deux stations
     text += "<strong>Arrêts</strong> :<br>";
 
 
@@ -65,7 +67,7 @@ function findPath() {
     }
   } else {
     // Si non, on affiche un message d'erreur
-    text = "<br><br><strong style='color:red;'>Veuillez sélectionner deux stations!</strong>";
+    text = "<br><br><strong style='color:red;'>Veuillez sélectionner deux stations !</strong>";
   }
 
   document.getElementById("path").innerHTML = text; // On affecte la valeur de la variable text à la balise de paragraphe avec l'id "path"

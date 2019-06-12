@@ -20,28 +20,25 @@ Date de création : 08.05.2019
     <div style="margin:20px;">
       <div class="row">
         <div class="col-sm-3">
-          <br>
+          
           <h1>PathFinder</h1>
-          <p>Auteur : Moulin Vincent</p>
-          <p>Classe : INF2dlm-A</p>
-          <p>Date de création : 08.05.2019</p>
+          <p>Auteur : Moulin Vincent<br>
+          Classe : INF2dlm-A<br>
+          Date de création : 08.05.2019</p>
           <hr>
-          <h2 id="selected_stations">Cliquez sur un arrêt !</h2>
-          <br>
-          <button type="button" class="btn btn-info" onclick="clearAll()">Tout effacer</button>
-          <br>
-          <br>
-          <div class="form-group">
-            <label for="inputFrom"><strong>From</strong></label>
-            <input type="text" class="form-control" id="inputFrom" placeholder="Choisissez un arrêt sur la map" readonly>
-          </div>
-          <div class="form-group">
-            <label for="inputTo"><strong>To</strong></label>
-            <input type="text" class="form-control" id="inputTo" placeholder="Choisissez un arrêt sur la map" readonly>
-          </div>
-          <br>
-          <button type="button" class="btn btn-primary" onclick="findPath()">Lancer la recherche d'itinéraire</button>
+          <h4>Sélectionner deux arrêts en cliquant dessus !</h4>
           <p id="path"></p>
+          <br>
+          <div class="form-group">
+            <label for="inputFrom"><strong>De</strong></label>
+            <input type="text" class="form-control form-control-sm" id="inputFrom" placeholder="Choisissez un arrêt sur la map" readonly>
+          </div>
+          <div class="form-group">
+            <label for="inputTo"><strong>À</strong></label>
+            <input type="text" class="form-control form-control-sm" id="inputTo" placeholder="Choisissez un arrêt sur la map" readonly>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary btn-sm" onclick="findPath()">Lancer la recherche d'itinéraire</button>
         </div>
         <div class="col-sm-9">
           <div class="content_map">
