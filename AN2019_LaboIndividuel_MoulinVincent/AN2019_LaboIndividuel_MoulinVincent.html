@@ -1,0 +1,85 @@
+<!-- 
+Algorithme numérique - Labo individuel
+
+Auteur : Moulin Vincent
+Classe : INF2dlm-a
+Date de création : 08.05.2019
+-->
+
+<html>
+<head>
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <script src="https://unpkg.com/d3-tube-map@latest/dist/d3-tube-map.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/tubeMap.css">
+  <title>PathFinder - Vincent Moulin</title>
+</head>
+  <body>
+    <div style="margin:20px;">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+          <h1>PathFinder</h1>
+          <p>Auteur : Moulin Vincent</p>
+          <p>Classe : INF2dlm-A</p>
+          <p>Date de création : 08.05.2019</p>
+          <hr>
+          <h2 id="selected_stations">Cliquez sur un arrêt !</h2>
+          <br>
+          <button type="button" class="btn btn-info" onclick="clearAll()">Tout effacer</button>
+          <br>
+          <br>
+          <div class="form-group">
+            <label for="inputFrom"><strong>From</strong></label>
+            <input type="text" class="form-control" id="inputFrom" placeholder="Choisissez un arrêt sur la map" readonly>
+          </div>
+          <div class="form-group">
+            <label for="inputTo"><strong>To</strong></label>
+            <input type="text" class="form-control" id="inputTo" placeholder="Choisissez un arrêt sur la map" readonly>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary" onclick="findPath()">Lancer la recherche d'itinéraire</button>
+          <p id="path"></p>
+        </div>
+        <div class="col-sm-9">
+          <div class="content_map">
+            <div id="tube-map"></div>
+          </div>
+          <p>Vous pouvez <strong>zoomer sur la map</strong> avec la molette.</p>
+        </div>
+        <br>
+      </div>
+      <br>
+      <hr>
+      <h2>Contextualisation</h2>
+      <p>Dans le cadre du cours d'algorithme numérique, il nous a été demandé de réaliser un petit projet personnel ayant un rapport direct avec le cours. J'ai pour ma part décidé de concevoir une application en lien avec le chapitre optimisation.</p>
+      <p>Le but est de pouvoir modéliser une map de métro (la map est stockée au format JSON), et d'avoir ensuite la possibilité de pouvoir choisir un arrêt de départ de d'arrivée. Le programme doit pouvoir trouver le chemin le plus court entre les deux stations.</p>
+      <h2>Méthodologie</h2>
+      <p><strong>Utilisation de d3js</strong></p>
+      <p><strong>Gestion du graphe</strong></p>
+      <p><strong>Algorithme de parcours</strong></p>
+      <h2>Dysfonctionnement</h2>
+      <p>Lors du chargement de la page, on peut constater en se rendant sous "Examiner l'élément", dans la partie console, que nous avons une erreur. Celle-ci provient du fichier JSON.</p>
+      <p>L'erreur est la suivante : <strong>SyntaxError: unexpected token: ':'</strong></p>
+      <p>J'ai passé le JSON dans un validator en ligne, cependant, celui-ci est valide. J'ai tenté de découvrir comment cette erreur pouvait alors subvenir. Je n'ai pas pu résoudre ce problème.</p>
+      <h2>Conclusion</h2>
+      <p>Pour conclure, je pense que le projet s'est bien déroulé. J'ai réalisé l'ensemble des objectifs principaux, qui étaient d'afficher une map, donner la possibilité de cliquer sur deux stations et afficher le chemin des stations.</p>
+      <p>Au niveau des objectifs supplémentaires, le prix du trajet est affiché et calculer. Au niveau du dessins sur la map, malgré plusieurs essais et recherches, cela ne semble pas faisable, du moins dans le temps à notre disposition. J'ai donc eu l'idée de mettre la couleur de la ligne à côté de stations affichées en bas à droite lors de l'affichage d'un itinéraire.</p>
+      <p>Pour terminer cette conclusion, ce projet m'a permis d'appliquer un chapitre vu en cours mais qui n'a pas été appliqué avec un exemple concret en javascript. De plus les différentes connaissances en javascript acquises durant le cours et les laboratoire en groupe m'ont permis de pouvoir réaliser cette application.</p>
+      <h2>Source</h2>
+      <ul>
+        <li>Sources...</li>
+      </ul>
+    </div>
+    <script type="text/javascript" src="json/stations.json"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/stations.js"></script>
+    <script type="text/javascript" src="js/graph.js"></script>
+    <script type="text/javascript" src="js/priorityqueue.js"></script>
+
+    <script type="text/javascript" src="js/generate_graph.js"></script>
+    <script type="text/javascript" src="js/generate_map.js"></script>
+  </body>
+</html>
