@@ -17,9 +17,6 @@ let mapData = new Map();
 */
 function findPath() {
 
-  //mapData.getLineName("RedBull");
-  //console.log(mapData.getLineColor("Riverbank"));
-
   // Récupération des différentes valeurs contenues dans les inputs
   let from = document.getElementById("inputFrom").value;
   let to = document.getElementById("inputTo").value;
@@ -85,7 +82,7 @@ function clearAll() {
 }
 
 
-// Instanciation d'un nouvel objet d ela classe graphe
+// Instanciation d'un nouvel objet de la classe graphe
 let g = new Graph();
 
 // Ajout de tous les noeuds à notre graphe

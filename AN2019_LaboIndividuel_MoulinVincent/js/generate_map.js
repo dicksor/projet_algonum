@@ -43,9 +43,6 @@ d3.json("json/stations.json").then(function(data) {
     let zoomContainer = svg.call(zoom);
     let initialScale = 1;
 
-    //zoom.scaleTo(zoomContainer, initialScale);
-    //zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
-
     function zoomed() {
       svg.select('g').attr('transform', d3.event.transform.toString());
     }

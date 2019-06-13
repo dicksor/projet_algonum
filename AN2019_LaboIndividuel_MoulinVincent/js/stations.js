@@ -1,3 +1,15 @@
+/* 
+Algorithme numérique - Labo individuel
+
+Auteur : Moulin Vincent
+Classe : INF2dlm-a
+Date de création : 08.05.2019
+*/
+
+/**
+* Classe Stations
+* Permet de modifier les stations dans les inputs selon les clicks sur la map
+*/
 class Stations {
 
 	constructor()

@@ -8,7 +8,7 @@ Date de création : 08.05.2019
 
 /**
 * Classe Map
-* Contient un certain nombre de méthodes utiles au projet
+* permet de récupérer des informations sur la map à l'aide de plusieurs fonctions
 */
 class Map {
 

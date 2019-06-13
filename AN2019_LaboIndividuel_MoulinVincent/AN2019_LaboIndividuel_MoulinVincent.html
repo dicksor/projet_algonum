@@ -51,23 +51,57 @@ Date de création : 08.05.2019
       <br>
       <hr>
       <h2>Contextualisation</h2>
-      <p>Dans le cadre du cours d'algorithme numérique, il nous a été demandé de réaliser un petit projet personnel ayant un rapport direct avec le cours. J'ai pour ma part décidé de concevoir une application en lien avec le chapitre optimisation.</p>
-      <p>Le but est de pouvoir modéliser une map de métro (la map est stockée au format JSON), et d'avoir ensuite la possibilité de pouvoir choisir un arrêt de départ de d'arrivée. Le programme doit pouvoir trouver le chemin le plus court entre les deux stations.</p>
+      <p>Dans le cadre du cours d'algorithme numérique de deuxième année, il nous a été demandé de réaliser un petit projet personnel ayant un rapport direct avec le cours et l'algorithme numérique en général. J'ai pour ma part décidé de concevoir une petite application en lien avec le chapitre optimisation. L'ensmeble du projet a été développé en JavaScript et testé sur FireFox.</p>
+      <p>Le but est de pouvoir modéliser une map de métro (la map est stockée au format JSON), et d'avoir ensuite la possibilité de pouvoir choisir un arrêt de départ et d'arrivée. Le programme doit pouvoir trouver le chemin le plus court entre les deux stations. Les arrêts traversés, ainsi que le prix du trajet sont affichés sur le côté gauche.</p>
+
+
       <h2>Méthodologie</h2>
-      <p><strong>Utilisation de d3js</strong></p>
+
+      <p><strong>Utilisation de d3.js</strong></p>
+      <p>D3.js est une bibliothèque graphique Javascript permettant l'affichage de données numériques sous une forme graphique.</p>
+      <p>Je l'ai utilisé dans ce projet pour l'affichage de la map. La création d'une map complète, réelle et cohérente demande beaucoup de temps, j'ai donc préféré récupérer un fichier JSON sur internet (le lien se trouve dans les sources) qui contient déjà les données nécéssaires à son bon rendu.</p>
+      <p>La map représentée a pour but de s'approcher du métro de Londres.</p>
+      <p>Dans le projet, j'ai uniquement utilisé le fichier JSON pour l'affichage, et ensuite je le parcours pour récupérer des informations tel que l'appartenance d'une station à une ligne, ou la couleur d'une ligne.</p>
+
       <p><strong>Gestion du graphe</strong></p>
+      <p>Le graphe a été implémenté à la main. Dans le fichier <i>generate_graph.js</i>, en bas du fichier, j'instancie un nouvel objet de ma class Graph. J'y ajoute ensuite tous les arrêts. Ensuite les différents sommets sont reliés ensemble.</p>
+      <p>Le poids de tous les arc a été mis par défaut à <i>1</i>. Le prix du billets pour un itinéraire est de 20 centimes pour un poids de <i>1</i>, ce qui signifie qu'un trajet qui a une somme de poids de <i>5</i>, coûtera alors <i>1.-</i></p>
+      <p>Ceci peut donc être modifié par la suite, sil l'on souhaite modifier le poids d'un trajet, il suffit de changer le paramètre dans la fonction d'ajout d'arc.</p>
+
       <p><strong>Algorithme de parcours</strong></p>
+      <p>Pour retrouver le tracé du parcours le plus rapide, j'utilise la méthode <i>findPathDijkstra(startNode, endNode)</i> de la classe <i>Graph</i>, qui prend donc en paramètre la station de départ et d'arrivée. On reçoit en retour un tableau. Ce tableau contient un tableau des stations parcourues dans l'ordre, ainsi que la somme des poids.</p>
+      <p>Comme expliqué plus haut, le graphe est un graphe pondéré (de <i>1</i> actuellement) et il est aussi non orienté (Les voyages peuvent s'effectuer dans les deux sens)</p>
+      <p>L'algorithme trouvera donc le chemin le plus court grâce à ces poids. En effet pour minimiser le temps de trajet ou le prix, il faut chosir le chemin qui a une somme de poids le moins élevé.</p>
+      <p>L'algorithme utilise une queue de priorité afin de minimiser le trajet, cette queue a été implémentée dans la classe <i>PriorityQueue</i>.</p>
+
+      <p><strong>Affichage de l'itinéraire</strong></p>
+      <p>Pour pouvoir afficher un itinéraire, il est nécessaire de d'abord cliquer sur l'arrêt de départ de d'arrivée. Cela aura pour conséquence de remplir les champs <i>De</i> et <i>À</i>.</p>
+      <p>En cliquant sur le bouton <i>Lancer la recherche d'itinéraire</i>, différentes informations vont s'afficher :</p>
+      <ul>
+        <li>Nombre d'arrêts à parcourir</li>
+        <li>Prix du trajet</li>
+        <li>Liste des arrêts</li>
+      </ul>
+      <p>Les arrêts sont affichés de la même couleur que la ligne à laquelle ils appartiennent. À noter que les stations par lesquelles passent plusieurs lignes sont notées : <i>"Nom de la station" (multi-line)</i>. Les stations "noeuds", c'est à dire une station qui possède plusieurs quais, un pour chaque ligne, sont notés de cette manière : <strong>Nom de la station (NODE)</strong></p>
+      <p>Cet affichage résulte de la complexité à pouvoir définir de façon juste à tous les coups la couleur à attribuer à ces noeuds. Cela devrait être possible, malheureusement il faudrait une analyse plus profonde du graphe et je n'ai pas réussi à mettre cela en place dans le temps à disposition.</p>
+
+
       <h2>Dysfonctionnement</h2>
-      <p>Lors du chargement de la page, on peut constater en se rendant sous "Examiner l'élément", dans la partie console, que nous avons une erreur. Celle-ci provient du fichier JSON.</p>
+      <p>Lors du chargement de la page, on peut constater en se rendant sous "Examiner l'élément" du navigateur Firefox, sous la partie console, que nous avons une erreur. Celle-ci provient du fichier JSON <i>stations.json</i>. Celui-ci contient toutes les informations relatives au dessin de la map, des stations, et des lignes.</p>
       <p>L'erreur est la suivante : <strong>SyntaxError: unexpected token: ':'</strong></p>
       <p>J'ai passé le JSON dans un validator en ligne, cependant, celui-ci est valide. J'ai tenté de découvrir comment cette erreur pouvait alors subvenir. Je n'ai pas pu résoudre ce problème.</p>
+
+
       <h2>Conclusion</h2>
       <p>Pour conclure, je pense que le projet s'est bien déroulé. J'ai réalisé l'ensemble des objectifs principaux, qui étaient d'afficher une map, donner la possibilité de cliquer sur deux stations et afficher le chemin des stations.</p>
-      <p>Au niveau des objectifs supplémentaires, le prix du trajet est affiché et calculer. Au niveau du dessins sur la map, malgré plusieurs essais et recherches, cela ne semble pas faisable, du moins dans le temps à notre disposition. J'ai donc eu l'idée de mettre la couleur de la ligne à côté de stations affichées en bas à droite lors de l'affichage d'un itinéraire.</p>
+      <p>Au niveau des objectifs supplémentaires, le prix du trajet est affiché et calculé. Au niveau du dessins sur la map, malgré plusieurs essais et recherches, cela ne semble pas faisable, du moins dans le temps à notre disposition. J'ai donc eu l'idée de mettre le nom de la station de la même couleur que la ligne à laquelle elle appartient lors de l'affichage d'un itinéraire.</p>
       <p>Pour terminer cette conclusion, ce projet m'a permis d'appliquer un chapitre vu en cours mais qui n'a pas été appliqué avec un exemple concret en javascript. De plus les différentes connaissances en javascript acquises durant le cours et les laboratoire en groupe m'ont permis de pouvoir réaliser cette application.</p>
       <h2>Source</h2>
       <ul>
-        <li>Sources...</li>
+        <li>Cours d'Algorithme et SDD de Monsieur Hüsser</li>
+        <li>Cours d'Algorithme Numérique de Messieurs Gobron et Senn</li>
+        <li>https://d3js.org/</li>
+        <li>https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9dff99073db420</li>
       </ul>
     </div>
     <script type="text/javascript" src="json/stations.json"></script>
