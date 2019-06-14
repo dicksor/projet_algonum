@@ -32,6 +32,7 @@ class Map {
 	*/
 	getLineColor(lineName)
 	{
+		// si c'est une station "spéciale", on retourne sa particularité
 		if(lineName == "node")
 		{
 			return "node";
@@ -42,6 +43,7 @@ class Map {
 		}
 		else
 		{
+			// return de la couleur correspondant à la ligne
 			return this.linesColor[lineName];
 		}
 	}
@@ -64,17 +66,17 @@ class Map {
 				{
 					if(this.linesStations[stations][i].node == "yes")
 					{
-						return "node";
+						return "node"; // si == yes, alros c'est un noeud
 					}
 					else
 					{
-						listStations.push(stations);
+						listStations.push(stations); // on ajoute une station correspondant à la station en paramètre
 					}
 				}
 			}
 		}
 
-		if(listStations.length == 1)
+		if(listStations.length == 1) // si taille d ela liste à un, alors on prend le nom de la ligne, sinon c'est une stations multiline
 		{
 			return listStations[0];
 		}
@@ -120,21 +122,20 @@ class Map {
 			let s = 0;
 			for(let i = 0; i < arrayLines.length; i++)
 			{
-				this.linesColor[arrayLines[i][1].name] = arrayLines[i][1].color;
-				this.linesStations[arrayLines[i][1].name] = [];
+				this.linesColor[arrayLines[i][1].name] = arrayLines[i][1].color; // création d'un tableau qui a pour index le nom d'une ligne et comme valeur sa couleur en hexa
+				this.linesStations[arrayLines[i][1].name] = []; // tableau deux dimensions qui aura comme index le nom d'une ligne, et le sous-tableau contiendra les stations liées
 
 				for(s = 0; s < arrayLines[i][1].nodes.length; s++)
 				{
 					if(arrayLines[i][1].nodes[s].name != undefined)
 					{
-
 						if(arrayLines[i][1].nodes[s].marker != undefined)
 						{
-							this.linesStations[arrayLines[i][1].name].push({name:arrayLines[i][1].nodes[s].name, node:"yes"});
+							this.linesStations[arrayLines[i][1].name].push({name:arrayLines[i][1].nodes[s].name, node:"yes"});  // Ajout de la ligne, mis à yes si un marker est défini
 						}
 						else
 						{
-							this.linesStations[arrayLines[i][1].name].push({name:arrayLines[i][1].nodes[s].name, node:"no"});
+							this.linesStations[arrayLines[i][1].name].push({name:arrayLines[i][1].nodes[s].name, node:"no"}); // Ajout de la ligne, mis à no si pas de marker (donc pas un noeud)
 						}
 						
 					}

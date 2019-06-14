@@ -25,7 +25,7 @@ function findPath() {
   let text = "";
 
   // on vérifie que les deux valeurs ont bien des valeurs
-  if(from && to){
+  if(from && to) {
     // Récupération d'un tableau contenant les noeuds qui sont traversés pour le parcours, ainsi que la sommes des pondérations
     // Prend en paramètre la station de départ et d'arrivée
     let data = g.findPathDijkstra(from, to);
@@ -43,17 +43,18 @@ function findPath() {
     // Parcours de toutes les stations à traverser et affichage
     for (let i = 0; i < data[0].length; i++) { 
 
+      // Récupération de la couleur selon le nom de la station
       color = mapData.getLineColor(mapData.getLineName(data[0][i]));
 
-      if(color == "node")
+      if(color == "node") // si c'est un noeud affichage différent
       {
         textStations = "<span style='font-weight:bold'>" + data[0][i] + " (NODE)</span>";
-        color = "black";
+        color = "black"; // on met la couleur par défaut en noir
       }
-      else if(color == "multiline")
+      else if(color == "multiline") // si c'est une multiline affichage différent
       {
         textStations = "<i>\"" + data[0][i] + "\" (multi-line)</i>";
-        color = "black";
+        color = "black"; // on met la couleur par défaut en noir
       }
       else
       {
@@ -62,7 +63,9 @@ function findPath() {
 
       text += "- <span style='color:" + color + ";'>" + textStations + "</span><br>";
     }
-  } else {
+  } 
+  else 
+  {
     // Si non, on affiche un message d'erreur
     text = "<br><br><strong style='color:red;'>Veuillez sélectionner deux stations !</strong>";
   }
